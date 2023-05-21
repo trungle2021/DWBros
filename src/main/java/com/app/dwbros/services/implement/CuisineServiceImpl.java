@@ -23,7 +23,7 @@ public class CuisineServiceImpl implements CuisineService {
     }
 
     @Override
-    public CuisineDTO delete(String id) {
-        return null;
+    public void delete(String id) {
+
     }
 }

@@ -24,7 +24,7 @@ public class MealTimeServiceImpl implements MealTimeService {
     }
 
     @Override
-    public MealTimeDTO delete(String id) {
-        return null;
+    public void delete(String id) {
+
     }
 }

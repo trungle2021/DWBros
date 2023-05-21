@@ -23,7 +23,6 @@ public class BillImageServiceImpl implements BillImageService {
     }
 
     @Override
-    public BillImageDTO delete(String id) {
-        return null;
+    public void delete(String id){
     }
 }

@@ -23,7 +23,7 @@ public class FavoriteCuisineImpl implements FavoriteCuisineService {
     }
 
     @Override
-    public FavoriteCuisineDTO delete(String id) {
-        return null;
+    public void delete(String id) {
+
     }
 }

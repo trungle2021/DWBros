@@ -23,7 +23,7 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public FoodDTO delete(String id) {
-        return null;
+    public void delete(String id) {
+
     }
 }

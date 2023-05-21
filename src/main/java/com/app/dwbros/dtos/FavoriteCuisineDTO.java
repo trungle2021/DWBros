@@ -1,5 +1,6 @@
 package com.app.dwbros.dtos;
 
+import com.app.dwbros.entities.Users;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

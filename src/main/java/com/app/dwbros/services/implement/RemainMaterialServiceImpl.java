@@ -24,7 +24,7 @@ public class RemainMaterialServiceImpl implements RemainMaterialService {
     }
 
     @Override
-    public RemainMaterialDTO delete(String id) {
-        return null;
+    public void delete(String id) {
+
     }
 }

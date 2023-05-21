@@ -14,7 +14,6 @@ public class AuthServiceImpl implements AuthService {
         String email = loginDTO.getEmail();
         String password = loginDTO.getPassword();
         Authentication authentication = new UsernamePasswordAuthenticationToken(email,password);
-        authentication.
         return null;
     }
 

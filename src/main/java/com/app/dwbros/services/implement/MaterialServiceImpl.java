@@ -23,7 +23,7 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public MaterialDTO delete(String id) {
-        return null;
+    public void delete(String id) {
+
     }
 }

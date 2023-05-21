@@ -1,4 +1,6 @@
 package com.app.dwbros.dtos;
+import com.app.dwbros.entities.FoodTypes;
+import com.app.dwbros.entities.Recipes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

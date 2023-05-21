@@ -24,7 +24,7 @@ public class RecipeDetailServiceImpl implements RecipeDetailService {
     }
 
     @Override
-    public RecipeDetailDTO delete(String id) {
-        return null;
+    public void delete(String id) {
+
     }
 }

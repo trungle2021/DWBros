@@ -23,7 +23,7 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public BillDTO delete(String id) {
-        return null;
+    public void delete(String id) {
+
     }
 }
