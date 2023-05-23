@@ -35,10 +35,10 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         AccountDTO account = accountService.getOneByEmail(email);
-        String accountId = account.getAccountId();
         if(account == null){
             throw new UsernameNotFoundException("Email not existed");
         }else{
+            String accountId = account.getAccountId();
             AuthUserDTO authUserDTO = new AuthUserDTO();
             String roleName = roleService.getOneByAccountId(accountId).getRoleName();
             String userId = userService.getOneByAccountId(accountId).getUserId();

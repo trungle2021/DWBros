@@ -1,10 +1,11 @@
 package com.app.dwbros.securities;
 
 import com.app.dwbros.securities.CustomUserDetailServices.CustomUserDetailService;
-import com.app.dwbros.securities.CustomUserDetails.CustomUserDetails;
-import com.app.dwbros.securities.JWT.JWTAuthenticationEntryPoint;
-import com.app.dwbros.securities.JWT.JWTAuthenticationFilter;
+import com.app.dwbros.securities.JWT.JwtAuthenticationEntryPoint;
+import com.app.dwbros.securities.JWT.JwtAuthenticationFilter;
 import com.app.dwbros.utils.SD;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,12 +22,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
-    AuthenticationProvider authenticationProvider;
-    JWTAuthenticationEntryPoint authenticationEntryPoint;
-    JWTAuthenticationFilter authenticationFilter;
-    CustomUserDetailService customUserDetailService;
-    BCryptPasswordEncoder passwordEncoder;
+
+    private final JwtAuthenticationEntryPoint authenticationEntryPoint;
+    private final JwtAuthenticationFilter authenticationFilter;
+    private final CustomUserDetailService customUserDetailService;
+    private final BCryptPasswordEncoder passwordEncoder;
+
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
@@ -51,7 +54,7 @@ public class SecurityConfig {
                                 .anyRequest().authenticated())
                 .exceptionHandling( exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider)
+                .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
 

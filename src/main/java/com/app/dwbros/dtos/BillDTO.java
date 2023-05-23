@@ -17,5 +17,6 @@ public class BillDTO {
     private String billId;
     private Date billDate;
     private Double billAmount;
+    private String userId;
     private Collection<BillImageDTO> billImagesByBillId;
 }

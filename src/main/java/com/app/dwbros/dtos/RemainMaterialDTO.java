@@ -13,6 +13,7 @@ import lombok.Setter;
 public class RemainMaterialDTO {
     private String remainMaterialId;
     private String materialId;
+    private String userId;
     private MaterialDTO materialsByMaterialId;
 
 }

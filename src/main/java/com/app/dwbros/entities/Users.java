@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.HashSet;
 
 @Entity
 @Getter
@@ -15,30 +17,34 @@ import java.util.HashSet;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Users {
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "user_id", nullable = false, length = 36)
     private String userId;
     @Basic
-    @Column(name = "name", nullable = true, length = 50)
-    private String name;
-    @Basic
-    @Column(name = "age", nullable = true)
-    private Integer age;
-    @Basic
     @Column(name = "account_id", nullable = true, length = 36)
     private String accountId;
-
     @Basic
-    @Column(name = "is_deleted", columnDefinition = "TINYINT(1)",length = 1)
-    private boolean is_deleted;
+    @Column(name = "age")
+    private Integer age;
     @Basic
-    @Column(name = "is_verified", columnDefinition = "TINYINT(1)", length = 1)
-    private boolean is_verified;
-    @OneToMany(mappedBy = "usersByUserId",cascade = CascadeType.ALL,orphanRemoval = true)
-    private Collection<FavoriteCuisines> favoriteCuisinesByUserId = new HashSet<>();
+    @Column(name = "is_deleted", nullable = true)
+    private Byte isDeleted;
+    @Basic
+    @Column(name = "is_verified", nullable = true)
+    private Byte isVerified;
+    @Basic
+    @Column(name = "name", nullable = true, length = 50)
+    private String name;
+    @OneToMany(mappedBy = "usersByUserId")
+    private Collection<Bills> billsByUserId;
+    @OneToMany(mappedBy = "usersByUserId")
+    private Collection<FavoriteCuisines> favoriteCuisinesByUserId;
+    @OneToMany(mappedBy = "usersByUserId")
+    private Collection<RemainMaterials> remainMaterialsByUserId;
     @ManyToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "account_id",insertable=false, updatable=false)
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id",insertable = false,updatable = false)
     private Accounts accountsByAccountId;
+
 
 }

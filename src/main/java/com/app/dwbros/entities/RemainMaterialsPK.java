@@ -7,23 +7,15 @@ import jakarta.persistence.Id;
 
 import java.io.Serializable;
 
-public class RecipeDetailsPK implements Serializable {
-    @Column(name = "recipe_id", nullable = false, length = 36)
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String recipeId;
+public class RemainMaterialsPK implements Serializable {
     @Column(name = "material_id", nullable = false, length = 36)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String materialId;
-
-    public String getRecipeId() {
-        return recipeId;
-    }
-
-    public void setRecipeId(String recipeId) {
-        this.recipeId = recipeId;
-    }
+    @Column(name = "user_id", nullable = false, length = 36)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String userId;
 
     public String getMaterialId() {
         return materialId;
@@ -33,23 +25,31 @@ public class RecipeDetailsPK implements Serializable {
         this.materialId = materialId;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RecipeDetailsPK that = (RecipeDetailsPK) o;
+        RemainMaterialsPK that = (RemainMaterialsPK) o;
 
-        if (recipeId != null ? !recipeId.equals(that.recipeId) : that.recipeId != null) return false;
         if (materialId != null ? !materialId.equals(that.materialId) : that.materialId != null) return false;
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = recipeId != null ? recipeId.hashCode() : 0;
-        result = 31 * result + (materialId != null ? materialId.hashCode() : 0);
+        int result = materialId != null ? materialId.hashCode() : 0;
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
         return result;
     }
 }

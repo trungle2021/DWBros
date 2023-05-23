@@ -89,7 +89,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void delete(String id) {
         Accounts accounts = accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ACCOUNT,"id",id));
-        accounts.set_deleted(true);
+        accounts.setIsDeleted(true);
         accountRepository.save(accounts);
     }
 }

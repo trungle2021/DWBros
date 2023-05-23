@@ -1,9 +1,12 @@
 package com.app.dwbros.dtos;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
-
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegisterDTO {
     private String email;
     private String password;
