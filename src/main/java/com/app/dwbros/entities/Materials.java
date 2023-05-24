@@ -6,7 +6,7 @@ import java.util.Collection;
 
 @Entity
 public class Materials {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Id
     @Column(name = "material_id", nullable = false, length = 36)
     private String materialId;

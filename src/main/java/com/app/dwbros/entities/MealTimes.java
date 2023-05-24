@@ -7,7 +7,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "meal_times", schema = "dwbros", catalog = "")
 public class MealTimes {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Id
     @Column(name = "meal_time_id", nullable = false, length = 36)
     private String mealTimeId;

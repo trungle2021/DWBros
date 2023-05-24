@@ -6,11 +6,9 @@ import jakarta.persistence.*;
 @Table(name = "remain_materials", schema = "dwbros", catalog = "")
 @IdClass(RemainMaterialsPK.class)
 public class RemainMaterials {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "material_id", nullable = false, length = 36)
     private String materialId;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "user_id", nullable = false, length = 36)
     private String userId;

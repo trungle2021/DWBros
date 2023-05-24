@@ -7,7 +7,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "food_categories", schema = "dwbros", catalog = "")
 public class FoodCategories {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Id
     @Column(name = "category_id", nullable = false, length = 36)
     private String categoryId;

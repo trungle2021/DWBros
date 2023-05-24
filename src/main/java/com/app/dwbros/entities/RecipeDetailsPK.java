@@ -10,11 +10,9 @@ import java.io.Serializable;
 public class RecipeDetailsPK implements Serializable {
     @Column(name = "recipe_id", nullable = false, length = 36)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String recipeId;
     @Column(name = "material_id", nullable = false, length = 36)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String materialId;
 
     public String getRecipeId() {

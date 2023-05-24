@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "bill_images", schema = "dwbros", catalog = "")
 public class BillImages {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Id
     @Column(name = "bill_image_id", nullable = false, length = 36)
     private String billImageId;

@@ -7,7 +7,7 @@ import java.util.Collection;
 
 @Entity
 public class Bills {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Id
     @Column(name = "bill_id", nullable = false, length = 36)
     private String billId;

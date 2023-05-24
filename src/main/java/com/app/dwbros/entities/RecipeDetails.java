@@ -6,11 +6,9 @@ import jakarta.persistence.*;
 @Table(name = "recipe_details", schema = "dwbros", catalog = "")
 @IdClass(RecipeDetailsPK.class)
 public class RecipeDetails {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "recipe_id", nullable = false, length = 36)
     private String recipeId;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "material_id", nullable = false, length = 36)
     private String materialId;

@@ -10,15 +10,12 @@ import java.io.Serializable;
 public class FoodTypesPK implements Serializable {
     @Column(name = "meal_time_id", nullable = false, length = 36)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String mealTimeId;
     @Column(name = "food_id", nullable = false, length = 36)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String foodId;
     @Column(name = "category_id", nullable = false, length = 36)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String categoryId;
 
     public String getMealTimeId() {

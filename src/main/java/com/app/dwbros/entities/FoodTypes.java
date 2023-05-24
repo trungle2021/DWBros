@@ -6,15 +6,12 @@ import jakarta.persistence.*;
 @Table(name = "food_types", schema = "dwbros", catalog = "")
 @IdClass(FoodTypesPK.class)
 public class FoodTypes {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "meal_time_id", nullable = false, length = 36)
     private String mealTimeId;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "food_id", nullable = false, length = 36)
     private String foodId;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "category_id", nullable = false, length = 36)
     private String categoryId;

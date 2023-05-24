@@ -6,11 +6,9 @@ import jakarta.persistence.*;
 @Table(name = "favorite_cuisines", schema = "dwbros", catalog = "")
 @IdClass(FavoriteCuisinesPK.class)
 public class FavoriteCuisines {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "user_id", nullable = false, length = 36)
     private String userId;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "cuisine_id", nullable = false, length = 36)
     private String cuisineId;
