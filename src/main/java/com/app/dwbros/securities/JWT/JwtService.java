@@ -1,24 +1,28 @@
 package com.app.dwbros.securities.JWT;
 
-import com.app.dwbros.exceptions.DWBException;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.lang.Strings;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import static com.app.dwbros.utils.SD.jwtExpiry;
-import static com.app.dwbros.utils.SD.jwtSecret;
-
 @Component
 public class JwtService {
+    @Value("${app.jwt-secret}")
+    public String jwtSecret;
+    @Value("${app.jwt-expiration-milliseconds}")
+    public Long jwtExpiry;
+
 
     private Key getSignInKey(){
         return Keys.hmacShaKeyFor(jwtSecret.getBytes());
@@ -70,11 +74,10 @@ public class JwtService {
         return extractClaim(token,Claims::getExpiration);
     }
 
-    public static String getTokenFromHeader(HttpServletRequest request){
+    public String getTokenFromHeader(HttpServletRequest request){
         String bearerToken = request.getHeader("Authorization");
         if(Strings.hasText(bearerToken) && bearerToken.startsWith("Bearer")){
-            String token = bearerToken.substring(7,bearerToken.length());
-            return token;
+            return bearerToken.substring(7);
         }
         return null;
     }

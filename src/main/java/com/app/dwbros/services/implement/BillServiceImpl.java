@@ -2,10 +2,12 @@ package com.app.dwbros.services.implement;
 
 import com.app.dwbros.dtos.BillDTO;
 import com.app.dwbros.services.BillService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
+@RequiredArgsConstructor
 public class BillServiceImpl implements BillService {
     @Override
     public List<BillDTO> getAll() {

@@ -1,0 +1,63 @@
+@Component
+public class CustomAuthenticationProvider implements AuthenticationProvider {
+
+    private final static Logger LOGGER = LogManager.getLogger(CustomAuthenticationProvider.class);
+
+    @Autowired
+    private UserService userService;
+
+    @Override
+    public Authentication authenticate(final Authentication authentication) throws AuthenticationException{
+
+        final String username = authentication.getName();
+        final String password = authentication.getCredentials().toString();
+
+        try {
+
+            /* CHECKING USER CREDENTIAL */
+            /* check account */
+            User userDetail = userService.findByUsername(username);
+            if (userDetail == null){
+                throw new Exception("User not found!");
+            }
+
+            /* check password */
+            String origPass = Utilities.getEncrypted(new String(Base64.decodeBase64(password)), username);
+            if(!userDetail.getPassword().equals(origPass)){
+                throw new Exception("Wrong username or password!");
+            }
+
+            /* check is active */
+            if(!userDetail.getIsActive()){
+                throw new Exception("User is not active!");
+            }
+
+            /* check allowance in web type */
+            if(Access.isWeb()){
+                if(!userDetail.getIsWeb())
+                    throw new Exception("Web access prohibited!");
+            }
+
+            /* check allowance in mobile type */
+            if(Access.isMobile()){
+                if(!userDetail.getIsMobile())
+                    throw new Exception("Mobile access prohibited!");
+            }
+
+            /* do some logs */
+            userService.login(userDetail);
+
+            return new UsernamePasswordAuthenticationToken(userDetail, "{noop}".concat(origPass), userDetail.getAuthorities());
+
+        } catch (Exception e) {
+            LOGGER.error("[OAUTH] Error : " + e.getLocalizedMessage());
+            throw new BadCredentialsException(e.getLocalizedMessage(), e);
+        }
+    }
+
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return authentication.equals(UsernamePasswordAuthenticationToken.class);
+    }
+
+}

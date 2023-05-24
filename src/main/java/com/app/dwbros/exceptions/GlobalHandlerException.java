@@ -35,4 +35,10 @@ public class GlobalHandlerException {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(), webRequest.getDescription(false), HttpStatus.INTERNAL_SERVER_ERROR.toString() );
         return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
     }
+
+  @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorDetails> handlerUserNotFoundException(UserNotFoundException exception, WebRequest webRequest){
+      ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(), webRequest.getDescription(false), HttpStatus.NOT_FOUND.toString() );
+      return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+  }
 }

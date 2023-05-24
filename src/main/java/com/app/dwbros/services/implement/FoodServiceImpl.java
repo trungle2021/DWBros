@@ -2,10 +2,12 @@ package com.app.dwbros.services.implement;
 
 import com.app.dwbros.dtos.FoodDTO;
 import com.app.dwbros.services.FoodService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
+@RequiredArgsConstructor
 public class FoodServiceImpl implements FoodService {
     @Override
     public List<FoodDTO> getAll() {

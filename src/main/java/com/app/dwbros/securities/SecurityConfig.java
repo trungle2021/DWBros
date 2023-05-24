@@ -1,5 +1,6 @@
 package com.app.dwbros.securities;
 
+import com.app.dwbros.securities.AuthenticationProvider.CustomAuthProvider;
 import com.app.dwbros.securities.CustomUserDetailServices.CustomUserDetailService;
 import com.app.dwbros.securities.JWT.JwtAuthenticationEntryPoint;
 import com.app.dwbros.securities.JWT.JwtAuthenticationFilter;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,20 +29,33 @@ public class SecurityConfig {
 
     private final JwtAuthenticationEntryPoint authenticationEntryPoint;
     private final JwtAuthenticationFilter authenticationFilter;
-    private final CustomUserDetailService customUserDetailService;
-    private final BCryptPasswordEncoder passwordEncoder;
+//    private final CustomUserDetailService customUserDetailService;
+//    private final BCryptPasswordEncoder passwordEncoder;
+    private final CustomAuthProvider customAuthenticationProvider;
 
+
+//    @Bean
+//    public DaoAuthenticationProvider authenticationProvider(){
+//        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+//        daoAuthenticationProvider.setUserDetailsService(customUserDetailService);
+//        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+//        return daoAuthenticationProvider;
+//    }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(customUserDetailService);
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
-        return daoAuthenticationProvider;
+    public AuthenticationManager authManagerBuider(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.authenticationProvider(customAuthenticationProvider);
+        return authenticationManagerBuilder.build();
     }
+
+
+
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+
        return configuration.getAuthenticationManager();
     }
 
@@ -54,7 +69,7 @@ public class SecurityConfig {
                                 .anyRequest().authenticated())
                 .exceptionHandling( exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider())
+                .authenticationProvider(customAuthenticationProvider)
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
 

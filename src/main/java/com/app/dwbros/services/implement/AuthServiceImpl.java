@@ -4,15 +4,12 @@ import com.app.dwbros.dtos.AuthResponse;
 import com.app.dwbros.dtos.LoginDTO;
 import com.app.dwbros.dtos.RegisterDTO;
 import com.app.dwbros.entities.Accounts;
-import com.app.dwbros.entities.Users;
 import com.app.dwbros.repositories.AccountRepository;
 import com.app.dwbros.securities.JWT.JwtService;
 import com.app.dwbros.services.AuthService;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 @Service

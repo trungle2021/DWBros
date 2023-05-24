@@ -1,24 +1,25 @@
 package com.app.dwbros.services.implement;
 
+import com.app.dwbros.dtos.AccountDTO;
 import com.app.dwbros.dtos.UserDTO;
 import com.app.dwbros.entities.Users;
 import com.app.dwbros.exceptions.ResourceNotFoundException;
 import com.app.dwbros.repositories.UserRepository;
 import com.app.dwbros.services.UserService;
 import com.app.dwbros.utils.EntityMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.app.dwbros.utils.SD.ACCOUNT;
 import static com.app.dwbros.utils.SD.USER;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public List<UserDTO> getAll() {
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO getOneByAccountId(String accountId) {
         Users user = userRepository.findByAccountId(accountId);
         if(user == null){
-            throw new ResourceNotFoundException(USER,"account_id",accountId);
+            throw new ResourceNotFoundException(ACCOUNT,"account_id",accountId);
         }else{
             return EntityMapper.mapToDto(user,UserDTO.class);
         }

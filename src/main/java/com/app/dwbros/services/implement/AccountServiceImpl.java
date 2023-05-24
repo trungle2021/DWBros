@@ -10,6 +10,7 @@ import com.app.dwbros.services.AccountService;
 import com.app.dwbros.services.RoleService;
 import com.app.dwbros.utils.EntityMapper;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,13 @@ import java.util.List;
 import static com.app.dwbros.utils.SD.ACCOUNT;
 
 @Service
+@RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
 
-    private AccountRepository accountRepository;
-    private RoleService roleService;
-    private BCryptPasswordEncoder passwordEncoder;
+    private final AccountRepository accountRepository;
+    private final RoleService roleService;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public List<AccountDTO> getAll() {

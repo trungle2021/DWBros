@@ -7,6 +7,7 @@ import com.app.dwbros.exceptions.ResourceNotFoundException;
 import com.app.dwbros.repositories.RoleRepository;
 import com.app.dwbros.services.RoleService;
 import com.app.dwbros.utils.EntityMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,9 @@ import java.util.List;
 import static com.app.dwbros.utils.SD.ROLE;
 
 @Service
+@RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
-    RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
     @Override
     public List<RoleDTO> getAll() throws Exception {
         List<Roles> rolesList = roleRepository.findAll();
