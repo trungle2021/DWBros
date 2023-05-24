@@ -5,7 +5,7 @@ import com.app.dwbros.dtos.RoleDTO;
 import java.util.List;
 
 public interface RoleService {
-    List<RoleDTO> getAll() throws Exception;
+    List<RoleDTO> getAll();
 
     RoleDTO getOneByRoleName(String roleName);
     RoleDTO getOneById(String id);

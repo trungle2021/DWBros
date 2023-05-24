@@ -28,7 +28,7 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         AccountDTO account = accountService.getOneByEmail(email);
         if(account == null){
-            throw new UsernameNotFoundException("Email not existed");
+            throw new UsernameNotFoundException("Email not exists");
         }else{
             String accountId = account.getAccountId();
             AuthUserDTO authUserDTO = new AuthUserDTO();

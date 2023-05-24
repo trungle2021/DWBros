@@ -62,7 +62,8 @@ public class AccountServiceImpl implements AccountService {
             accounts.setRoleId(accountDTO.getRoleId());
         }
         accounts.setEmail(accountDTO.getEmail());
-        accounts.setPassword(passwordEncoder.encode(accounts.getPassword()));
+        accounts.setIsDeleted(false);
+        accounts.setPassword(passwordEncoder.encode(accountDTO.getPassword()));
         Accounts newAccount = accountRepository.save(accounts);
         return EntityMapper.mapToDto(newAccount,AccountDTO.class);
     }
@@ -71,7 +72,7 @@ public class AccountServiceImpl implements AccountService {
     public AccountDTO getOneByEmail(String email) {
         Accounts accounts = accountRepository.findByEmail(email);
         if(accounts == null){
-            throw new ResourceNotFoundException(ACCOUNT,"email",email);
+            throw new ResourceNotFoundException("Email not exists");
         }
         return EntityMapper.mapToDto(accounts,AccountDTO.class);
     }

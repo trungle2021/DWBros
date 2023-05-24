@@ -1,10 +1,7 @@
 package com.app.dwbros.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +13,7 @@ import java.util.Collection;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Users {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id
@@ -29,10 +27,10 @@ public class Users {
     private Integer age;
     @Basic
     @Column(name = "is_deleted", nullable = true)
-    private Byte isDeleted;
+    private Boolean isDeleted;
     @Basic
     @Column(name = "is_verified", nullable = true)
-    private Byte isVerified;
+    private Boolean isVerified;
     @Basic
     @Column(name = "name", nullable = true, length = 50)
     private String name;

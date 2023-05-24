@@ -13,8 +13,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoleDTO {
-    private String roleId;
-    private String roleName;
-    private Collection<AccountDTO> accountsByRoleId;
-
+    public String roleId;
+    public String roleName;
+    public Collection<AccountDTO> accountsByRoleId;
 }

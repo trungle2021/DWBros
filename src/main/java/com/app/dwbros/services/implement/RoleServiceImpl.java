@@ -21,7 +21,7 @@ import static com.app.dwbros.utils.SD.ROLE;
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
     @Override
-    public List<RoleDTO> getAll() throws Exception {
+    public List<RoleDTO> getAll(){
         List<Roles> rolesList = roleRepository.findAll();
         if(rolesList.isEmpty()){
             throw new DWBException(HttpStatus.INTERNAL_SERVER_ERROR,"Role Data is empty");
@@ -31,7 +31,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleDTO getOneByRoleName(String roleName) {
-        Roles role = roleRepository.findByRoleName(roleName);
+        Roles role = roleRepository.findByRoleName(roleName).get(0);
         if(role == null){
             throw new ResourceNotFoundException(ROLE,"role_name",roleName);
         }
@@ -67,9 +67,11 @@ public class RoleServiceImpl implements RoleService {
     public RoleDTO update(String id) {
         Roles role = roleRepository.findById(id).orElseThrow(()->new ResourceNotFoundException(ROLE,"id",id));
         RoleDTO roleDTO = EntityMapper.mapToDto(role,RoleDTO.class);
+
         validateRoles(roleDTO);
-        role.setRoleName(roleDTO.getRoleName());
-        return EntityMapper.mapToDto(roleRepository.save(role),RoleDTO.class);
+
+            role.setRoleName(roleDTO.getRoleName());
+            return EntityMapper.mapToDto(roleRepository.save(role),RoleDTO.class);
     }
 
     @Override
@@ -78,7 +80,7 @@ public class RoleServiceImpl implements RoleService {
         roleRepository.delete(role);
     }
 
-    private boolean validateRoles(RoleDTO roleDTO){
+    private void validateRoles(RoleDTO roleDTO){
 
         boolean roleNameIsExisted = roleRepository
                 .findAll().stream()
@@ -95,6 +97,5 @@ public class RoleServiceImpl implements RoleService {
         if(!errorList.isEmpty()){
             throw new DWBException(HttpStatus.BAD_REQUEST,errorList.toString());
         }
-        return true;
     }
 }
