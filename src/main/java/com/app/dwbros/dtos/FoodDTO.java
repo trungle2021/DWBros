@@ -1,14 +1,11 @@
 package com.app.dwbros.dtos;
-import com.app.dwbros.entities.FoodTypes;
 import com.app.dwbros.entities.Recipes;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Collection;
-import java.util.HashSet;
 
 @Getter
 @Setter
